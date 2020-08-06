@@ -1,0 +1,36 @@
+$colors: (
+  ash: #f8f9fa,
+  black: #000,
+  dark: #4a4a4a,
+  grey: #778896,
+  green: #19ae9f,
+  light-grey: #c5ced6,
+  lighter-grey: #e9ecef,
+  primary: #8d26b1,
+  red: #dc3545,
+  white: #fff
+);
+
+$font-families: (
+  playfair: 'Playfair Display',
+  nunito: 'Nunito'
+);
+
+$font-weights: (
+  light: 300,
+  regular: 400,
+  semi-bold: 600,
+  bold: 700
+);
+
+$font-sizes: (
+  xx-small: 9px,
+  x-small: 12px,
+  small: 14px,
+  regular: 16px,
+  medium: 18px,
+  large: 24px,
+  m-large: 35px,
+  x-large: 40px,
+  xx-large: 70px
+);

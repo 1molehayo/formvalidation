@@ -1,0 +1,45 @@
+.form {
+  margin: 0 auto;
+  width: 100%;
+  max-width: 600px;
+}
+
+.form-group {
+  position: relative;
+  margin-bottom: 2rem;
+  border-radius: 5px;
+  border: 0;
+  padding: 0;
+  background: transparent;
+}
+
+.form-control {
+  @include font-size(regular);
+  display: block;
+  border: 2px solid color(light-grey);
+  padding: 0.8rem 1rem;
+  height: auto;
+  background: transparent;
+  color: color(black);
+
+  &.is-invalid {
+    border-color: color(red);
+  }
+
+  &:disabled {
+    background-color: color(lighter-grey);
+    opacity: 0.8;
+  }
+}
+
+.form-label {
+  @include font-size(x-small);
+  @include font-weight(bold);
+  position: relative;
+  display: inline-block;
+  margin-bottom: 5px;
+  background: transparent;
+  text-transform: capitalize;
+  color: color(grey);
+  transition: transform 0.5s ease;
+}
