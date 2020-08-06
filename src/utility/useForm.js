@@ -22,8 +22,6 @@ export function useForm(formState, setForm, validate) {
         form.invalid = true;
       }
 
-      console.log(errors);
-
       if (isObjectEmpty(errors)) {
         form.invalid = false;
       }

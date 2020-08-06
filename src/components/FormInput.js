@@ -35,6 +35,7 @@ export const FormInput = props => {
           type="text"
           className="form-control"
           id={id}
+          name={id}
           value={value}
           required={required}
           disabled={disabled}
@@ -64,6 +65,7 @@ export const FormInput = props => {
           'is-invalid': error
         })}
         id={id}
+        name={id}
         value={value}
         required={required}
         disabled={disabled}

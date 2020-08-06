@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import {
   Nav,
   Navbar,
@@ -8,16 +8,10 @@ import {
   Container
 } from 'react-bootstrap';
 import { NavLink } from 'react-router-dom';
+import { useAuth } from 'utility/useAuth';
 
 export const Navigation = () => {
-  const [name, setName] = useState('');
-
-  useEffect(() => {
-    const data = localStorage.getItem('name');
-    if (data) {
-      setName(data);
-    }
-  }, []);
+  const { user, logout } = useAuth();
 
   return (
     <Navbar className="nav" color="light" sticky="top" bg="light" expand="md">
@@ -39,17 +33,16 @@ export const Navigation = () => {
               </NavLink>
             </NavItem>
 
-            {name ? (
-              <NavDropdown title={name} id="nav-dropdown">
-                <NavDropdown.Item>Dropdown1</NavDropdown.Item>
-                <NavDropdown.Item>Dropdown2</NavDropdown.Item>
-                <NavDropdown.Item>Dropdown3</NavDropdown.Item>
+            {user?.name ? (
+              <NavDropdown title={user.name} id="nav-dropdown">
+                <NavDropdown.Item>Profile</NavDropdown.Item>
+                <NavDropdown.Item onClick={() => logout()}>
+                  Logout
+                </NavDropdown.Item>
               </NavDropdown>
             ) : (
               <NavItem>
-                <span className="nav-link" onClick={() => localStorage.clear()}>
-                  Logout
-                </span>
+                <span className="nav-link">Login</span>
               </NavItem>
             )}
           </Nav>

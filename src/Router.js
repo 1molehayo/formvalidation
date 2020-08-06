@@ -1,7 +1,9 @@
-import React, { useState, useEffect, lazy } from 'react';
+import React, { lazy } from 'react';
 import { Router, Switch, withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { AuthRoute, NonauthRoute } from 'PrivateRoutes';
+import { Loader } from 'components';
+import { useAuth } from 'utility/useAuth';
 import history from './history';
 
 const Home = lazy(() => import('pages/Home'));
@@ -27,16 +29,11 @@ Scroll.propTypes = {
 const ScrollToTop = withRouter(Scroll);
 
 const RouterComponent = () => {
-  const [isAuthenticated, setAuth] = useState(false);
+  const { loggedIn, loading } = useAuth();
 
-  useEffect(() => {
-    const data = localStorage.getItem('name');
-    if (data) {
-      setAuth(true);
-    }
-  }, []);
-
-  return (
+  return loading ? (
+    <Loader show />
+  ) : (
     <Router history={history}>
       <ScrollToTop>
         <Switch>
@@ -44,21 +41,21 @@ const RouterComponent = () => {
             exact
             path="/"
             allowRedirect
-            isAuthenticated={isAuthenticated}
+            isAuthenticated={loggedIn}
             component={FormPage}
           />
 
           <AuthRoute
             exact
             path="/welcome"
-            isAuthenticated={isAuthenticated}
+            isAuthenticated={loggedIn}
             component={Home}
           />
 
           <NonauthRoute
             exact
             path="/page"
-            isAuthenticated={isAuthenticated}
+            isAuthenticated={loggedIn}
             component={Page}
           />
 

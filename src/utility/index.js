@@ -133,7 +133,7 @@ export const checkFieldValidity = form => {
 
   // eslint-disable-next-line no-unused-vars
   for (const key in form) {
-    if (!form[key].value) {
+    if (key !== 'invalid' && !form[key].value) {
       errors[key] = `Please fill the ${key} field`;
     }
   }
@@ -156,8 +156,17 @@ export const checkFieldValidity = form => {
 
   if (
     form.confirmPassword.value &&
-    form.confirmPassword.value !== form.password.value
+    !validatePassword(form.confirmPassword.value)
   ) {
+    errors.confirmPassword = `password is invalid. Try again`;
+  }
+
+  if (
+    form.password.value &&
+    form.confirmPassword.value &&
+    form.password.value !== form.confirmPassword.value
+  ) {
+    errors.password = `password doesn't match`;
     errors.confirmPassword = `password doesn't match`;
   }
 

@@ -11,10 +11,13 @@ import { PageLayout } from 'layouts/PageContainer';
 import { useForm } from 'utility/useForm';
 import { ReactComponent as Spinner } from 'assets/img/pulse.svg';
 import { useHistory } from 'react-router-dom';
+import { useAuth } from 'utility/useAuth';
 
 function FormPage() {
   const [form, setForm] = useState({ ...FORM_FIELDS });
   const [loading, setLoading] = useState(false);
+
+  const { login } = useAuth();
 
   const history = useHistory();
 
@@ -30,7 +33,7 @@ function FormPage() {
 
     setTimeout(() => {
       setLoading(false);
-      localStorage.setItem('name', form.fullName.value);
+      login({ name: form.fullName.value });
       setForm({ ...FORM_FIELDS });
       history.push('/welcome');
     }, 3000);
@@ -45,6 +48,7 @@ function FormPage() {
             <Col md={6}>
               <FormInput
                 type="text"
+                id="fullName"
                 label="Full Name"
                 value={form.fullName.value}
                 onChange={e => updateForm(e.target.value, 'fullName')}
@@ -56,6 +60,7 @@ function FormPage() {
             <Col md={6}>
               <FormInput
                 type="email"
+                id="email"
                 label="Email Address"
                 value={form.email.value}
                 onChange={e => updateForm(e.target.value, 'email')}
@@ -66,6 +71,7 @@ function FormPage() {
             <Col md={6}>
               <FormInput
                 type="tel"
+                id="phoneNumber"
                 label="Phone Number"
                 value={form.phoneNumber.value}
                 onChange={e => updateForm(e.target.value, 'phoneNumber')}
@@ -77,6 +83,7 @@ function FormPage() {
               <FormInput
                 type="password"
                 label="Password"
+                id="password"
                 value={form.password.value}
                 onChange={e => updateForm(e.target.value, 'password')}
                 error={form.password.error}
@@ -87,6 +94,7 @@ function FormPage() {
               <FormInput
                 type="password"
                 label="Confirm Password"
+                id="confirmPassword"
                 value={form.confirmPassword.value}
                 onChange={e => updateForm(e.target.value, 'confirmPassword')}
                 error={form.confirmPassword.error}
@@ -97,6 +105,7 @@ function FormPage() {
               <FormInput
                 type="text"
                 label="Credit / Debit Card Number"
+                id="cardNumber"
                 value={form.cardNumber.value}
                 onChange={e =>
                   updateForm(
@@ -114,6 +123,7 @@ function FormPage() {
               <FormInput
                 type="text"
                 label="Expiration Date"
+                id="expirationDate"
                 value={form.expirationDate.value}
                 onChange={e =>
                   updateForm(formatExpiryDate(e.target.value), 'expirationDate')
@@ -126,6 +136,7 @@ function FormPage() {
               <FormInput
                 type="password"
                 label="Pin"
+                id="pin"
                 maxlength={4}
                 value={form.pin.value}
                 onChange={e => updateForm(e.target.value, 'pin')}
